@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom/client';
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import App from '../pages/Dashboard.tsx';
+import App from '../pages/Dashboard/Dashboard.tsx';
 import './index.css';
 
 import { Navbar } from './components/navbar/index.tsx';

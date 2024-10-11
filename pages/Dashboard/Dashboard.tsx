@@ -1,4 +1,5 @@
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
+import {OrdersChart, RevenueChart} from '../components/Chart/chart';
 
 function App() {
   const cards = [
@@ -23,6 +24,17 @@ function App() {
             </CardContent>
           </Card>
         ))}
+      </section>
+
+      <section>
+        <Card className='grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8'>
+          <div className='max-w-[600px] max-h-[600px]'>
+            <OrdersChart />
+          </div>
+          <div className='max-w-[600px] max-h-[600px]'>
+            <RevenueChart/>
+          </div>
+        </Card>
       </section>
     </div>
   );
