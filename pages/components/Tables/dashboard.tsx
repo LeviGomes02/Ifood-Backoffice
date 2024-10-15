@@ -16,24 +16,41 @@ export default function TableDashboard() {
     { id: '262', quantity: 2, value: 'R$135,50', status: 'Canceled' },
   ];
 
+  function getColor(status: string) {
+    switch (status) {
+      case 'Pending':
+        return 'text-yellow-500';
+        break;
+      case 'Completed':
+        return 'text-green-500';
+        break;
+      case 'Canceled':
+        return 'text-red-500';
+        break;
+      default:
+        return null;
+    }
+  }
+
   return (
     <div>
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className='text-center'>Id</TableHead>
-            <TableHead className='text-center'>Quantity</TableHead>
-            <TableHead className='text-center'>Value</TableHead>
-            <TableHead className='text-center'>Status</TableHead>
+            <TableHead className="text-center">Id</TableHead>
+            <TableHead className="text-center">Quantity</TableHead>
+            <TableHead className="text-center">Value</TableHead>
+            <TableHead className="text-center">Status</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody className='text-center'>
+
+        <TableBody className="text-center">
           {table.map((element, index) => (
-            <TableRow  key={index}>
-              <TableCell className='p-2'>{element.id}</TableCell>
-              <TableCell className='p-2'>{element.quantity}</TableCell>
-              <TableCell className='p-2'>{element.value}</TableCell>
-              <TableCell className='p-2'>{element.status}</TableCell>
+            <TableRow key={index}>
+              <TableCell className="p-2">{element.id}</TableCell>
+              <TableCell className="p-2">{element.quantity}</TableCell>
+              <TableCell className="p-2">{element.value}</TableCell>
+              <TableCell className={`p-2 ${getColor(element.status)}`}>{element.status}</TableCell>
             </TableRow>
           ))}
         </TableBody>
