@@ -20,7 +20,7 @@ export default function Mobile({ options }: MobileProps) {
   return (
     <div className="sm:hidden flex w-full bg-muted/50 border-b">
       <div className="flex items-center ">
-        <h1 className="text-lg font-bold ms-3 ">Dashboard</h1>
+        <h1 className="text-lg font-bold ms-3 ">Backoffice Sistem</h1>
       </div>
       <div className="flex flex-col ms-auto">
         <header className="sticky top-0 z-30 flex h-14 items-center px-4">
@@ -28,7 +28,7 @@ export default function Mobile({ options }: MobileProps) {
             <SheetTrigger asChild>
               <Button size="icon" variant="outline" className="sm:hidden">
                 <Menu />
-                <span className="sr-only">Abrir</span>
+                <span className="sr-only">Open</span>
               </Button>
             </SheetTrigger>
 

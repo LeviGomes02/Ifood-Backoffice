@@ -10,17 +10,74 @@ import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '../../src/components/ui/radio-group';
 import { Label } from '../../src/components/ui/label';
 import { ScrollArea } from '../../src/components/ui/scroll-area';
+import { useEffect, useState } from 'react';
+
+type card = {
+  description: string;
+  valueDay: string;
+  valueWeek: string;
+  valueMonth: string;
+  valueYear: string;
+};
 
 function App() {
   const cards = [
-    { descripton: 'Cash on Hand', value: '$ 12.532,64' },
-    { descripton: 'Available for Withdrawal', value: '$ 12.065,23' },
-    { descripton: 'Pending Release', value: '$ 667,41' },
-    { descripton: 'Refunds and Cancellations', value: '$ 535,10' },
-    { descripton: 'Sales', value: '$ 7.731,46' },
-    { descripton: 'Billings', value: '$ 4.235,23' },
-    { descripton: 'Expenses', value: '$ 5.496,23' },
-    { descripton: 'Average Order Value', value: '$ 96,23' },
+    {
+      description: 'Cash on Hand',
+      valueDay: '$ 417,75',
+      valueWeek: '$ 2.823,92',
+      valueMonth: '$ 12.532,64',
+      valueYear: '$ 150.317,48',
+    },
+    {
+      description: 'Available for Withdrawal',
+      valueDay: '$ 402,17',
+      valueWeek: '$ 2.570,64',
+      valueMonth: '$ 12.065,23',
+      valueYear: '$ 145.236,91',
+    },
+    {
+      description: 'Pending Release',
+      valueDay: '$ 22,25',
+      valueWeek: '$ 235,15',
+      valueMonth: '$ 667,41',
+      valueYear: '$ 6.283,17',
+    },
+    {
+      description: 'Refunds and Cancellations',
+      valueDay: '$ 19,11',
+      valueWeek: '$ 112,78',
+      valueMonth: '$ 535,10',
+      valueYear: '$ 5.117,42',
+    },
+    {
+      description: 'Sales',
+      valueDay: '$ 257,71',
+      valueWeek: '$ 1.853,97',
+      valueMonth: '$ 7.731,46',
+      valueYear: '$ 97.341,52',
+    },
+    {
+      description: 'Billings',
+      valueDay: '$ 141,17',
+      valueWeek: '$ 943,42',
+      valueMonth: '$ 4.235,23',
+      valueYear: '$ 52.431,22',
+    },
+    {
+      description: 'Expenses',
+      valueDay: '$ 183,21',
+      valueWeek: '$ 1.273,76',
+      valueMonth: '$ 5.496,23',
+      valueYear: '$ 68.945,18',
+    },
+    {
+      description: 'Average Order Value',
+      valueDay: '$ 95,34',
+      valueWeek: '$ 97,58',
+      valueMonth: '$ 96,23',
+      valueYear: '$ 98,12',
+    },
   ];
 
   const productsCard = [
@@ -37,21 +94,40 @@ function App() {
     { name: 'Year', id: 'year' },
   ];
 
+  const [filter, setFilter] = useState('month');
+
+  useEffect(() => {
+    console.log(filter);
+  }, [filter]);
+
+  function getFilterValue(card: card) {
+    switch(filter){
+      case "day": return card.valueDay;
+      case "week": return card.valueWeek;
+      case "month": return card.valueMonth;
+      case "year": return card.valueYear;
+      default: return null;
+    }
+  }
+
   return (
     <div className="sm:ml-14 p-4">
-      <section className="grid grid-cols-3 mb-16 mt-2 items-center">
+      <section className="grid sm:grid-cols-3 mb-16 mt-2 items-center max-sm:gap-6">
         <div>
-          <p className="text-2xl font-bold">Dashboard</p>
+          <p className="text-2xl font-bold max-sm:text-center">Dashboard</p>
         </div>
         <div>
           <Input type="search" placeholder="Search" className="drop-shadow-lg" />
         </div>
         <div>
-          <RadioGroup defaultValue="month" className="flex justify-center items-center">
+          <RadioGroup
+            value={filter}
+            className="flex justify-center items-center"
+          >
             {options.map((element, index) => (
-              <div className="flex items-center space-x-2 hover:text-red-500 " key={index}>
+              <div className="flex items-center space-x-2 hover:text-red-500 " key={index} onClick={() => setFilter(element.id)}>
                 <RadioGroupItem value={element.id} id={element.id} />
-                <Label htmlFor={element.id}>{element.name}</Label>
+                <Label htmlFor={element.id} >{element.name}</Label>
               </div>
             ))}
           </RadioGroup>
@@ -62,8 +138,8 @@ function App() {
         {cards.map((element, index) => (
           <Card className="hover:[box-shadow:0_4px_8px_gray]" key={index}>
             <CardContent className="text-center p-2">
-              <CardDescription>{element.descripton}</CardDescription>
-              <CardTitle className="text-[19px]">{element.value}</CardTitle>
+              <CardDescription>{element.description}</CardDescription>
+              <CardTitle className="text-[19px]">{getFilterValue(element)}</CardTitle>
             </CardContent>
           </Card>
         ))}
@@ -93,7 +169,7 @@ function App() {
             <CardTitle className="text-center text-lg border-b-2 p-4">Most Ordered Products</CardTitle>
 
             {productsCard.map((element, index) => (
-              <div className="flex p-2 max-sm:items-center max-sm:justify-center border-b-2" key={index}>
+              <div className="flex p-2 max-sm:items-center max-sm:justify-center border-b-2 hover:bg-gray-200 transition-colors duration-400" key={index}>
                 <img className=" h-full max-sm:h-20" src={element.image} alt="" />
 
                 <div className="flex flex-col">
